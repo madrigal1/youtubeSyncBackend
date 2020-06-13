@@ -73,8 +73,7 @@ export class SocketServer {
 
     private listen() {
         this.server.listen(this.port, () => {
-            Logger.info('test');
-            Logger.info(`Running server on port ${this.port}`);
+            Logger.info(`Running socket server on port ${this.port}`);
         })
 
         this.io?.sockets.on('connection', (socket: Socket) => {

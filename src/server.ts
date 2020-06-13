@@ -4,8 +4,8 @@ import Logger from "./core/Logger";
 import './sockets';
 
 
-app
+/* app
     .listen(port, () => {
         Logger.info(`Server running on : ${port}`);
     })
-    .on('error', (e) => Logger.error(e)); 
+    .on('error', (e) => Logger.error(e));  */
