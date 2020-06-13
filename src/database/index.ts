@@ -8,7 +8,7 @@ let dbURI: string;
 if (environment === 'development')
     dbURI = `mongodb://localhost:27017/ysDB`
 else
-    dbURI = `mongodb+srv://${db.user}:${encodeURI(db.password as string)}@riddlercsi2020-oi8yk.mongodb.net/${db.name}?retryWrites=true&w=majority`;
+    dbURI = `mongodb+srv://${db.user}:${db.password}@riddlercsi2020-oi8yk.mongodb.net/${db.name}?retryWrites=true&w=majority`;
 
 
 const options = {
