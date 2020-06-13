@@ -1,13 +1,11 @@
-/* import app from "./app";
+import app from "./app";
 import { port, host } from "./config";
 import Logger from "./core/Logger";
 import './sockets';
 
- */
 
-import './sockets';
-/* app
-    .listen(port || 3000, () => {
+app
+    .listen(port, () => {
         Logger.info(`Server running on : ${port}`);
     })
-    .on('error', (e) => Logger.error(e)); */
+    .on('error', (e) => Logger.error(e)); 

@@ -76,9 +76,6 @@ export class SocketServer {
             Logger.info('test');
             Logger.info(`Running server on port ${this.port}`);
         })
-            .catch((err) => {
-
-            });
 
         this.io?.sockets.on('connection', (socket: Socket) => {
             // Connect Socket
