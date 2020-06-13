@@ -12,8 +12,8 @@ if (!dir) dir = path.resolve('logs');
 
 if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
-const logLevel = environment === 'development' ? 'debug' : 'warn';
-
+/* const logLevel = environment === 'development' ? 'debug' : 'warn'; */
+const logLevel = 'debug';
 const options = {
     file: {
         level: logLevel,

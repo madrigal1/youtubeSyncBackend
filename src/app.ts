@@ -30,12 +30,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof ApiError) {
         ApiError.handle(err, res);
     } else {
-        if (environment == 'development') {
-            Logger.debug(err);
-            return res.status(500).send(err.message);
-        }
         ApiError.handle(new InternalError(), res);
-
     }
 })
 
