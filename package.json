@@ -27,6 +27,7 @@
     "http": "0.0.1-security",
     "mongoose": "^5.9.15",
     "socket.io": "^2.3.0",
+    "typescript": "^3.9.5",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
   }
