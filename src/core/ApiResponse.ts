@@ -74,7 +74,7 @@ export class InternalErrorResponse extends ApiResponse {
 }
 
 export class NotFoundResponse extends ApiResponse {
-    private url: string;
+    protected url: string;
 
     constructor(message = 'NotFound') {
         super(StatusCode.FAILURE, ResponseStatus.NOT_FOUND, message);
