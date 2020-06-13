@@ -1,6 +1,7 @@
+import app from '../app';
 import { SocketServer } from './SoketServer';
-import { server } from '../app';
 
 
-const ss = new SocketServer();
-ss.attach(server);
+const ss = new SocketServer(app);
+
+export { ss };

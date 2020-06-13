@@ -6,8 +6,8 @@ import './database';
 import { NotFoundError, ApiError, InternalError } from './core/ApiError';
 import { NotFoundResponse } from './core/ApiResponse';
 import routesV1 from './routes/v1';
-import { createServer } from 'http';
-import './sockets';
+
+
 
 process.on('uncaughtExecption', (e) => {
     Logger.error(e);
@@ -15,7 +15,9 @@ process.on('uncaughtExecption', (e) => {
 
 
 const app = express();
-export const server = createServer(app);
+
+
+
 
 
 app.use(express.json({ limit: '10mb' }));
@@ -33,5 +35,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         ApiError.handle(new InternalError(), res);
     }
 })
+
 
 export default app;

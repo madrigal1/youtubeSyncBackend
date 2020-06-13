@@ -1,4 +1,5 @@
 export const port: string = process.env.PORT as string;
+export const chatPort: string = process.env.CHAT_PORT as string;
 export const host: string = process.env.HOST as string;
 export const environment = process.env.NODE_ENV;
 

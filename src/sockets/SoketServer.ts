@@ -1,8 +1,10 @@
 import io, { Server as IOServer, Socket, Rooms } from 'socket.io';
-import { Server as HTTPServer } from 'http';
+import { Server as HTTPServer, HttpBase } from 'http';
 import Logger from '../core/Logger';
 import { InternalError } from '../core/ApiError';
-import { ytKey } from '../config';
+import { ytKey, chatPort, port } from '../config';
+import express from 'express';
+import { createServer } from 'http';
 
 
 
@@ -10,12 +12,15 @@ import { ytKey } from '../config';
 
 
 export class SocketServer {
-    io: IOServer | undefined;
-    private _http: HTTPServer | undefined;
+    public static readonly PORT: number = 8080;
+    private app!: express.Application;
+    private io!: IOServer;
+    private server!: HTTPServer;
     private static instance: SocketServer;
     public given_room = " ";
     private roomno = 1;
     private host = " ";
+    private port!: string | number;
 
     private users: any = [];
     private connections: Array<Socket> = [];
@@ -23,27 +28,57 @@ export class SocketServer {
     // Store all of the sockets and their respective room numbers
     private userrooms: any;
 
-    constructor() {
-        this.io;
-        this._http;
+    constructor(app: express.Application) {
+        this.createApp(app);
+        this.config();
+        this.createServer();
+        this.sockets();
+        this.listen();
+    }
+
+
+
+    private createApp(app: express.Application): void {
+        this.app = app;
+    }
+
+    private config(): void {
+        this.port = port || SocketServer.PORT;
         this.userrooms = {} as any;
     }
 
-    static getInstance() {
-        if (!this.instance)
-            SocketServer.instance = new SocketServer();
-        return SocketServer.instance;
+    private createServer(): void {
+        this.server = createServer(this.app);
     }
+
+    private sockets(): void {
+        this.io = io.listen(this.server, { origins: "*:*" });
+    }
+
+    /*  static getInstance() {
+         if (!this.instance)
+             SocketServer.instance = new SocketServer();
+         return SocketServer.instance;
+     } */
 
     public attach(server: HTTPServer) {
-        this._http = server;
-        this.start();
+        this.server = server;
+        this.listen();
+    }
+
+    public getApp(): express.Application {
+        return this.app;
     }
 
 
-    private start() {
-        Logger.info('Starting SocketServer');
-        this.io = io.listen(this._http);
+    private listen() {
+        this.server.listen(this.port, () => {
+            Logger.info('test');
+            Logger.info(`Running server on port ${this.port}`);
+        })
+            .catch((err) => {
+
+            });
 
         this.io?.sockets.on('connection', (socket: Socket) => {
             // Connect Socket
